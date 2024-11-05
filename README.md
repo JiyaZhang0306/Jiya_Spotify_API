@@ -32,6 +32,8 @@ With this idea, I want to create an interface that captures these special moment
 
 
 
+------
+
 ### Library:
 
 - gmplot==1.4.1
@@ -74,6 +76,10 @@ With this idea, I want to create an interface that captures these special moment
 
 
 
+
+
+
+
 ### Key Features:
 
 ​	1.**Unique Sunrise & Sunset Playlists** 
@@ -100,12 +106,34 @@ The app will allow users to save multiple locations, enabling them to track sunr
 
 
 
+
+
+
+
 ### Work Flow
 
 **1**.**Get from Google Maps API:**
 
  1. user's real-time IP geolocation information; getting the latitude and longitude information of the current location.
+
+    ```python
+    location_json = json.loads(response_map.read())
+    lattitude, longtitude = location_json['loc'].split(',')
+    print(lattitude, longtitude)
+    ```
+
+    
+
  2. geographic location information of the user's hometown; getting the latitude and longitude information of the user's hometown.
+
+    ```python
+    hometown_lattitude = response_hometown_map[0]['geometry']['location']['lat']
+    hometown_longtitude = response_hometown_map[0]['geometry']['location']['lng']
+    print(hometown_lattitude)
+    print(hometown_longtitude)
+    ```
+
+    
 
 **2.Get from Sunset & Sunrise API：**
 
@@ -113,21 +141,92 @@ The app will allow users to save multiple locations, enabling them to track sunr
 
 ​	2.Sunrise and sunset time of the hometown geographic location.
 
+```python
+hometown_suntime_json = json.loads(response_hometown.read())
+print(hometown_suntime_json)
+```
+
+```python
+sunrise_hometown = hometown_suntime_json['results']['sunrise']
+sunset_hometown = hometown_suntime_json['results']['sunset']
+
+# the printed time is in UK time(8hrs difference)
+print(sunrise_hometown)
+print(sunset_hometown)
+```
+
 ​	3.the time difference between the sunrise and sunset of the implemented geolocation and the hometown geolocation respectively
+
+```python
+# suntime difference
+
+#sunrise
+format_str = "%I:%M:%S %p"
+sunrise_hometown_dt = datetime.strptime(sunrise_hometown, format_str)
+sunrise_dt = datetime.strptime(sunrise, format_str)
+
+if sunrise_dt < sunrise_hometown_dt:
+    sunrise_dt += timedelta(days=1)
+
+sunrise_time_difference = sunrise_dt - sunrise_hometown_dt
+sunrise_difference = sunrise_time_difference.total_seconds() / 3600  # Convert seconds to hours
+print(sunrise_difference)
+
+#sunset
+format_str = "%I:%M:%S %p"
+sunset_hometown_dt = datetime.strptime(sunset_hometown, format_str)
+sunset_dt = datetime.strptime(sunset, format_str)
+
+if sunset_dt < sunset_hometown_dt:
+    sunset_dt += timedelta(days=1)
+
+sunset_time_difference = sunset_dt - sunset_hometown_dt
+sunset_difference = sunset_time_difference.total_seconds() / 3600  # Convert seconds to hours
+print(sunset_difference)
+```
 
 ​	4.Further processing of the acquired time difference (-8hrs), in preparation for the next step of being called by the Spotify API data.
 
+```python
+sunrise_mood = sunrise_difference - 8
+print(sunrise_mood)
 
+sunset_mood = sunset_difference - 8
+print(sunset_mood)
+```
 
 **3.Get from Spotify API:**
 
 ​	1.Have the top 50 hottest single songs in real-time location (GB) and hometown location (CN) separately
 
+```python
+playlist_id = '37i9dQZF1DWY4lFlS4Pnso'
+track_results = sp.playlist(playlist_id)
+print(track_results)
+```
+
 ​	2.Analyse the audio features of the songs, extract the ‘id’, and generate a list based on ‘feature’.
+
+```python
+song_data = track_results['tracks']['items']
+print(song_data)
+```
+
+```python
+song_feature = sp.audio_features(list(songs_id))
+print(song_feature)
+```
 
 ​	3.Take the time difference to one decimal place, and process the absolute value.
 
-​	4.In the generated song list, get the ‘validity’ feature, which means the positive or negative degree of the song, such as A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry). g. sad, depressed, angry).
+```python
+sunrise_matching_songs = [song for song in song_feature if round(song.get('valence'),1) == round(abs(sunrise_mood),1)]
+sunset_matching_songs = [song for song in song_feature if round(song.get('valence'),1) == round(abs(sunset_mood),1)]
+print(sunrise_matching_songs)
+print(sunset_matching_songs)
+```
+
+​	4.In the generated song list, get the ‘validity’ feature, which means the positive or negative degree of the song, such as a measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry). g. sad, depressed, angry).
 
 ​	5.Find valence values equal to the processed time difference, and find equivalent ‘song mood values’.
 
