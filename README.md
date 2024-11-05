@@ -32,7 +32,16 @@ With this idea, I want to create an interface that captures these special moment
 
 
 
-#### Library:
+### Library:
+
+gmplot==1.4.1
+googlemaps==4.10.0
+
+matplotlib
+
+Pandas
+
+Jupyter notebook
 
 
 
@@ -40,11 +49,9 @@ With this idea, I want to create an interface that captures these special moment
 
 
 
+### Used API:
 
-
-#### Used API:
-
-- Google Map API
+- [Google Map API](https://developers.google.com/maps/documentation/javascript/examples/control-positioning)
 
   通过谷歌地图API来获取：
 
@@ -52,7 +59,7 @@ With this idea, I want to create an interface that captures these special moment
 
   2.用户故乡的地理位置信息，从而得到用户故乡的经纬度信息
 
-- Sunset & Sunrise API
+- [Sunset & Sunrise API](https://sunrise-sunset.org/api#google_vignette)
 
   通过经纬度信息分别调取：
 
@@ -60,7 +67,7 @@ With this idea, I want to create an interface that captures these special moment
 
   2.故乡地理位置的日出日落时间情况
 
-- Spotify API
+- [Spotify API](https://developer.spotify.com/documentation/web-api)
 
   通过spotify api来分别获取：
 
@@ -74,7 +81,7 @@ With this idea, I want to create an interface that captures these special moment
 
 
 
-#### Key Features:
+### Key Features:
 
 ​	1.**Unique Sunrise & Sunset Playlists** 
 
@@ -100,39 +107,40 @@ The app will allow users to save multiple locations, enabling them to track sunr
 
 
 
-#### 4.Work Flow
+### Work Flow
 
-​	1.通过谷歌地图API来获取：
+**1**.**Get from Google Maps API:**
 
-​		1.用户实时的IP地理位置信息，从而得到目前位置的经纬度信息
+ 1. user's real-time IP geolocation information; getting the latitude and longitude information of the current location.
+ 2. geographic location information of the user's hometown; getting the latitude and longitude information of the user's hometown.
 
-​		2.用户故乡的地理位置信息，从而得到用户故乡的经纬度信息
+**2.Get from Sunset & Sunrise API：**
 
+​	1.Sunrise and sunset times for real-time geographic locations.
 
+​	2.Sunrise and sunset time of the hometown geographic location.
 
-​	2.通过Sunset & Sunrise API来获取：
+​	3.the time difference between the sunrise and sunset of the implemented geolocation and the hometown geolocation respectively
 
-​		1.实时地理位置的日出日落时间情况
-
-​		2.故乡地理位置的日出日落时间情况
-
-​		3.实施地理位置与故乡地理位置日出、日落分别的时间差
-
-​		4.对获取的时间差做进一步处理（-8hrs），为下一步被Spotify API数据调用做准备
+​	4.Further processing of the acquired time difference (-8hrs), in preparation for the next step of being called by the Spotify API data.
 
 
 
-​	3.通过Spotify API来获取：
+**3.Get from Spotify API:**
 
-​		1.实时位置（GB）与故乡位置（CN）最热门TOP50的单曲，生成两个
+​	1.Have the top 50 hottest single songs in real-time location (GB) and hometown location (CN) separately
 
-​		2.对单曲的音频特征进行分析，提取'id'，生成以“feature”为主的list
+​	2.Analyse the audio features of the songs, extract the ‘id’, and generate a list based on ‘feature’.
 
-​		3.对获取的时间差取到小数点后一位，并且进行取绝对值处理
+​	3.Take the time difference to one decimal place, and process the absolute value.
 
-​		4.在生成的歌曲list中获取“valence”feature， which意味着歌曲的积极或者消极程度，比如A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).
+​	4.In the generated song list, get the ‘validity’ feature, which means the positive or negative degree of the song, such as A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry). g. sad, depressed, angry).
 
-​		5.寻找与处理过的时间差相等的valence值，找到对等的“歌曲情绪值”
+​	5.Find valence values equal to the processed time difference, and find equivalent ‘song mood values’.
 
-​		6.
+​	6.Output a list of songs with sunrise and sunset that match ‘GB’ and ‘CN’ respectively.
+
+
+
+**4.Output"Sunrise time" and "Sunset time" playlist**
 
