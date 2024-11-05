@@ -10,7 +10,7 @@ The 9503km distance often makes it difficult to stay connected closely with my f
 
 
 
-With this idea, I want to create an interface that captures these special moments across time zones. By utilizing APIs to track and save the current or daily sunrise and sunset times, along with geographical location data, the app will generate unique playlists tailored to those moments. The music styles for sunrise and sunset will be customized based on time preferences and will evolve with similar genres over time. Each day, every different time zone, a new playlist will be created, and a reminder will pop up to enjoy it as the sun rises or sets. These playlists, categorized by location, date, and time, will be stored in a calendar view for easy reference. 
+With this idea, I want to create an interface that captures these **sunset&sunrise** moments across time zones. By utilizing APIs to track and save the current or daily sunrise and sunset times, along with geographical location data, the app will generate unique playlists tailored to those moments. The music styles for sunrise and sunset will be customized based on time preferences and will evolve with similar genres over time. Each day, every different time zone, a new playlist will be created, and a reminder will pop up to enjoy it as the sun rises or sets. These playlists, categorized by location, date, and time, will be stored in a calendar view for easy reference. 
 
 
 
