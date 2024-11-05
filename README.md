@@ -219,18 +219,29 @@ print(song_feature)
 
 ​	3.Take the time difference to one decimal place, and process the absolute value.
 
-```python
+​	4.In the generated song list, get the ‘validity’ feature, which means the positive or negative degree of the song, such as a measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry). g. sad, depressed, angry).
+
+​	5.Find valence values equal to the processed time difference, and find equivalent ‘song mood values’.
+
+```
 sunrise_matching_songs = [song for song in song_feature if round(song.get('valence'),1) == round(abs(sunrise_mood),1)]
 sunset_matching_songs = [song for song in song_feature if round(song.get('valence'),1) == round(abs(sunset_mood),1)]
 print(sunrise_matching_songs)
 print(sunset_matching_songs)
 ```
 
-​	4.In the generated song list, get the ‘validity’ feature, which means the positive or negative degree of the song, such as a measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry). g. sad, depressed, angry).
-
-​	5.Find valence values equal to the processed time difference, and find equivalent ‘song mood values’.
-
 ​	6.Output a list of songs with sunrise and sunset that match ‘GB’ and ‘CN’ respectively.
+
+```python
+sunset_song_uris = []
+for song in sunset_matching_songs:
+    sunset_song_uris.append(song['uri'])
+    
+for song in hometown_sunset_matching_songs:
+    sunset_song_uris.append(song['uri'])
+    
+print(sunset_song_uris)
+```
 
 
 
