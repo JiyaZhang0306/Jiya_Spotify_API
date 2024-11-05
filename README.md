@@ -16,17 +16,17 @@ With this idea, I want to create an interface that captures these special moment
 
 ## Contents:
 
-1.Library
+​	1.Library
 
-2.API Setup
+​	2.API Setup
 
-3.Key Features
+​	3.Key Features
 
-4.Work Flow
+​	4.Work Flow
 
-5.Interface Display
+​	5.Interface Display
 
-6.Conclusion
+​	6.Conclusion
 
 
 
@@ -34,14 +34,13 @@ With this idea, I want to create an interface that captures these special moment
 
 ### Library:
 
-gmplot==1.4.1
-googlemaps==4.10.0
-
-matplotlib
-
-Pandas
-
-Jupyter notebook
+- gmplot==1.4.1
+- googlemaps==4.10.0
+- spotipy==2.24.0
+- matplotlib-inline==0.1.7
+- urllib3==2.2.3
+- pandas==2.2.3
+- jupyterlab==4.2.5
 
 
 
@@ -53,31 +52,25 @@ Jupyter notebook
 
 - [Google Map API](https://developers.google.com/maps/documentation/javascript/examples/control-positioning)
 
-  通过谷歌地图API来获取：
+  **Use the Google Maps API to get:**
 
-  1.用户实时的IP地理位置信息，从而得到目前位置的经纬度信息
-
-  2.用户故乡的地理位置信息，从而得到用户故乡的经纬度信息
+  1. The user's real-time IP-based geolocation to acquire the current latitude and longitude information.
+  2. The user's hometown geolocation to acquire the latitude and longitude information of their hometown.
 
 - [Sunset & Sunrise API](https://sunrise-sunset.org/api#google_vignette)
 
-  通过经纬度信息分别调取：
+  **Using the latitude and longitude information to get:**
 
-  1.实时地理位置的日出日落时间情况
-
-  2.故乡地理位置的日出日落时间情况
+  1. The sunrise and sunset times for the real-time geolocation.
+  2. The sunrise and sunset times for the hometown geolocation.
 
 - [Spotify API](https://developer.spotify.com/documentation/web-api)
 
-  通过spotify api来分别获取：
+  **Use the Spotify API to get:**
 
-  1.地理位置中最热门的歌曲榜单
-
-  2.榜单中的音频信息
-
-  3.生成定制的歌曲列表
-
-
+  1. The top charts of popular songs for the specific geolocation.
+  2. The audio information of songs in the charts.
+  3. A custom-generated playlist.
 
 
 
