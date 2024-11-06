@@ -110,11 +110,13 @@ The app will allow users to save multiple locations, enabling them to track sunr
 
   - Get the **API restrictions** of **Geolocation API** from Google API
 
-    ![image2](C:\Users\perry\Desktop\images\image2.png)
+    
 
   - Get **Maps Platform API Key**
 
-    ![image](C:\Users\perry\Desktop\images\image.png)
+    
+
+  - 
 
   - Use **googlemap_key.txt** from Google Maps Platform
 
