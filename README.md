@@ -108,13 +108,23 @@ The app will allow users to save multiple locations, enabling them to track sunr
 
 - Google Map API Key:
 
-  Get **googlemap_key.txt** from Google Maps Platform
+  - Get the **API restrictions** of **Geolocation API** from Google API
+
+    ![image2](C:\Users\perry\Desktop\images\image2.png)
+
+  - Get **Maps Platform API Key**
+
+    ![image](C:\Users\perry\Desktop\images\image.png)
+
+  - Use **googlemap_key.txt** from Google Maps Platform
 
   ```python
   with open("googlemap_key.txt", "r") as file:
       googlemap_key = file.read()
   map_client = googlemaps.Client(googlemap_key)
   ```
+
+​		
 
 - Spotify Developer Information
 
