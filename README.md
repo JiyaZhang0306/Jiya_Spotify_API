@@ -78,8 +78,6 @@ With this idea, I want to create an interface that captures these **sunset&sunri
 
 
 
-
-
 ### Key Features:
 
 ​	1.**Unique Sunrise & Sunset Playlists** 
@@ -106,9 +104,34 @@ The app will allow users to save multiple locations, enabling them to track sunr
 
 
 
+#### API Key Setup:
 
+- Google Map API Key:
 
+  Get **googlemap_key.txt** from Google Maps Platform
 
+  ```python
+  with open("googlemap_key.txt", "r") as file:
+      googlemap_key = file.read()
+  map_client = googlemaps.Client(googlemap_key)
+  ```
+
+- Spotify Developer Information
+
+  ```python
+  with open('spotify_keys.json', 'r') as spotify_file:
+      tokens = json.load(spotify_file)
+  ```
+
+  - username
+
+  - client_id
+
+  - client_secret
+
+  - redirect
+
+    
 
 ### Work Flow
 
