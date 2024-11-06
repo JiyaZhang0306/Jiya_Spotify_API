@@ -118,6 +118,8 @@ The app will allow users to save multiple locations, enabling them to track sunr
 
 - Spotify Developer Information
 
+  Get **spotify_keys.json** from Spotify Developer Platform
+
   ```python
   with open('spotify_keys.json', 'r') as spotify_file:
       tokens = json.load(spotify_file)
